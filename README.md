@@ -496,5 +496,3 @@ None of this was tested on your hardware.
 3. **A station stuck in the tutorial blocks everyone.** That is the intended rule; use *Start the clock now…* on the supervisor in an emergency. Reproduce: close one station's browser during the tutorial — the others wait and the supervisor shows *Not connected*.
 4. **During the ready wait, the dashboard behind the card can't be used** (by design, so nothing happens before the clock starts).
 5. **Categories are placeholders.** Shape / Code / Sequence / Path and the DEMO clue texts are for the interface only.
-
-See **[TEST_CHECKLIST.md](TEST_CHECKLIST.md)** for the step-by-step device test.
