@@ -6,42 +6,6 @@ This repo holds the browser dashboards and the real-time game server for **Proje
 | --- | --- | --- |
 | Five players (3 operators) | 1 Puzzle Solver · 2 Clue Analyst · 3 Mission Communicator | 2 |
 | Four players (2 operators) | 4 Puzzle Solver · 5 Communicator | 2 |
-
-**Stage 7 adds** — see section 4c:
-
-- The real **Algorithm Sequencer**: each session the server picks Selection, Insertion, Merge or Bubble Sort. The solver must *perform* that algorithm step by step on a 6-number list; the server checks every move against the algorithm (free rearranging is impossible). A hint appears after 30 s. The clue (**AS-ORDER**) gives precedence rules that allow exactly one order of the five physical step cards.
-- The **final puzzle**: verifying the fifth physical puzzle switches every screen to **FINAL — DECODE THE MESSAGE**. The solver answers “What letter is X positions before C?” for each ciphertext letter; each correct answer releases that mapping (e.g. *Cipher C → A*) to the analyst and communicator. The ciphertext (RESCUED with a random shift 1–25) is on the supervisor's phone from the lobby onwards.
-- **Mission Success**: only the supervisor's *Verify final cipher* ends the game. Every station shows the Mission Success screen with the mission time and puzzle times; the clock stops.
-- **Session records**: the server records every session's timings (mission, each puzzle, final cipher) and saves them to `data/session-records.json` on the game laptop. The supervisor phone shows the live timing and a **Session history** with details and **CSV export**. Resets never delete records; a reset mid-mission is saved as *aborted*.
-
-**Stage 6 added** — see section 4b: real minigames for **Shortest Path** (weighted graph, shortest then longest simple path), **Logic Gates** (five Boolean questions with slide-open truth tables) and **Parity Matrix** (track the yellow tile through a 5 × 5 shuffle); puzzle-specific classification boxes; physical answers (classroom-graph weights and A → F route, lamp target, even/odd parity rule with an example grid) generated at session start and shown to the supervisor from the lobby onwards.
-
-**Stage 5 (first part) added** — see section 4a:
-
-- The real **Binary Switches** minigame: an 8-bit converter; three correct rounds release a clue packet.
-- **TERM CLASSIFICATION** replaces CLUE SORTING: the analyst drags three computer-science terms into Hardware / Input Devices / Output Devices / Computer Fundamentals. A correct packet unlocks the real clue; **a wrong one loses the packet and the solver must replay that minigame**.
-- Per-clue **Relayed: Yes/No** instead of briefings.
-- **Station 5 is now one "Communicator" page** with two panels side by side (Clue Analysis · Communication) — no tabs.
-- Supervisor **Binary Switches answer view** (target, the eight shapes with their values, which switches must be ON) and a **clue pipeline** panel. The answers are sent only to supervisor connections.
-
-(At the time the other four minigames were placeholders; Stages 6 and 7 replaced them all.)
-
-**Stage 4 added:**
-
-- A new lifecycle: **LOBBY → CUTSCENE → TUTORIAL (ready wait) → ACTIVE_MISSION → TIME_EXPIRED**. The eight-minute clock now starts only when every operator has finished their tutorial.
-- A **guided tutorial** for each role: the screen dims and one real element is highlighted, with a short explanation and Back / Next / Finish Tutorial.
-- A **CLUE SORTING** game for the analyst, replacing the dropdowns, links and notes: click a clue, then click a box (or drag it), then **Send to Communicator**.
-- Larger, more readable operator dashboards; the executor video preview stays on screen.
-- Supervisor view of tutorial progress, and an emergency “Start the clock now…” override.
-
-Unchanged from Stages 1–3: the cinematic and its local cache, synchronized playback, the supervisor controls, LAN and phone access, physical-puzzle verification, reconnection and the theme.
-
-**Executor app (in progress):** a native Android app for the two executor phones lives in `android-executor/` (see `android-executor/README.md`). Each phone joins as Executor 1 or 2 (never an operator station). Since M2 each phone streams its **live rear camera** over WebRTC to every operator dashboard: every role's video panel has **EXECUTOR 1 / EXECUTOR 2** buttons (each operator chooses independently), the picture is the clean camera image, and **Stats** / **Latency clock** buttons help measure quality. The supervisor page shows each phone's link and camera status under **Executor phones**. Decisions, architecture and network notes: `docs/EXECUTOR_APP.md`; real-device checks: `TEST_CHECKLIST.md` section 5.
-
-Since M3 the phones are the headset: the game's cutscene is **inside the app** and plays in sync on both phones (side-by-side, with sound) when the supervisor starts, followed by an executor tutorial and then the live camera in both eyes. The server now requires both phones to be **Ready** before Start Mission (or **Start anyway…**) and waits for both executors' tutorials before the mission clock (or **Start the clock now…**); set `GENESIS_REQUIRE_EXECUTORS=0` to run without phones.
-
-**Not included yet:** progressive vision distortion in the headset, voice chat, and a leaderboard view (the saved session records are designed for one).
-
 ---
 
 ## 1. Startup
