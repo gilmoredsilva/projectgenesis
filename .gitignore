@@ -1,0 +1,15 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+.vite/
+
+# The cinematic (~101 MB) stays out of version control. Never delete or modify it.
+CUTSCENE.mp4
+cutscene.mp4
+
+# Session timing records written by the game server (kept on the game laptop).
+data/
+
+# Local HTTPS certificates for the Communicator microphone (npm run https:setup). Private keys: never commit.
+certs/
